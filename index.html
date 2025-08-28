@@ -1,0 +1,1151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Era of Mathantics - Educational Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --accent: #00ff88;
+            --accent-dark: #008855;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --card-bg: #222222;
+            --border-color: #333333;
+            --success: #00c853;
+            --warning: #ff9800;
+            --error: #f44336;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+
+        .logo span {
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent), #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            background: var(--accent);
+            color: var(--primary-bg);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: var(--secondary-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        /* Notes Upload Section */
+        .notes-section {
+            padding: 100px 0;
+            background: var(--primary-bg);
+        }
+
+        .upload-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .upload-form input,
+        .upload-form select {
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .file-input-container {
+            position: relative;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .file-input-container:hover {
+            border-color: var(--accent);
+        }
+
+        .file-input-container input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            color: var(--text-secondary);
+        }
+
+        .file-input-label strong {
+            color: var(--accent);
+        }
+
+        .upload-form button {
+            background: var(--accent);
+            color: var(--primary-bg);
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .upload-form button:hover {
+            background: var(--accent-dark);
+        }
+
+        /* Notes Gallery */
+        .notes-gallery {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .note-card {
+            background: var(--secondary-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .note-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .note-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .pdf-icon {
+            font-size: 2rem;
+            color: var(--error);
+            margin-right: 1rem;
+        }
+
+        .note-content h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .note-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .file-info {
+            background: var(--primary-bg);
+            padding: 0.5rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .note-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .note-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .note-btn:hover {
+            background: var(--accent);
+            color: var(--primary-bg);
+        }
+
+        .note-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .note-btn:disabled:hover {
+            background: var(--primary-bg);
+            color: var(--text-primary);
+        }
+
+        /* Doubt Box Section */
+        .doubt-section {
+            padding: 100px 0;
+            background: var(--secondary-bg);
+        }
+
+        .doubt-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .doubt-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .doubt-form input,
+        .doubt-form textarea,
+        .doubt-form select {
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .doubt-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .doubt-form button {
+            background: var(--accent);
+            color: var(--primary-bg);
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .doubt-form button:hover {
+            background: var(--accent-dark);
+        }
+
+        .doubt-list {
+            margin-top: 2rem;
+        }
+
+        .doubt-item {
+            background: var(--secondary-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .doubt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .doubt-title {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .doubt-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .doubt-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            background: var(--warning);
+            color: var(--primary-bg);
+        }
+
+        .status-answered {
+            background: var(--success);
+            color: var(--primary-bg);
+        }
+
+        .admin-controls {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .admin-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .btn-answer {
+            background: var(--accent);
+            color: var(--primary-bg);
+        }
+
+        .btn-delete {
+            background: var(--error);
+            color: var(--primary-bg);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            background: var(--primary-bg);
+            padding: 100px 0;
+        }
+
+        .admin-controls-panel {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .permission-toggle {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border-color);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-bg);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .features-grid,
+            .notes-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Loading States */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .success-message {
+            background: var(--success);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .error-message {
+            background: var(--error);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="C:\Users\crack\Downloads\channels4_profile.jpg" class="logo">Era of <span>Mathantics</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#notes">Notes</a></li>
+                    <li><a href="#doubt">Doubt Box</a></li>
+                    <li><a href="#admin">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to the Era of Mathantics</h1>
+            <p>Revolutionizing mathematical education with secure PDF note sharing and collaborative learning.</p>
+            <a href="#notes" class="cta-button">Explore Notes</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Platform Features</h2>
+            <div class="features-grid">
+                <div class="feature-card animate">
+                    <div class="feature-icon">📚</div>
+                    <h3>PDF Note Sharing</h3>
+                    <p>Teachers can upload PDF mathematical notes that students can download instantly. Notes are protected and cannot be edited without permission.</p>
+                </div>
+                <div class="feature-card animate">
+                    <div class="feature-icon">❓</div>
+                    <h3>Doubt Resolution</h3>
+                    <p>Students can submit doubts and questions. Only teachers with proper permissions can respond and provide solutions.</p>
+                </div>
+                <div class="feature-card animate">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Admin Control</h3>
+                    <p>Complete control over content permissions. Decide who can edit, delete, or respond to content on the platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+<!-- Lecture Videos Section -->
+<section id="lectures" class="features" style="padding: 100px 0; background: var(--primary-bg);">
+    <div class="container">
+        <h2 class="section-title">Lecture Videos</h2>
+        <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+            <!-- Example YouTube video embed -->
+            <div class="feature-card" style="padding: 0; border: none; box-shadow: none; background: transparent;">
+                <iframe width="100%" height="180" src="https://www.youtube.com/embed/Go_aaHU09Ko?si=o2qq82v18bzT3m_a" 
+                    title="Lecture 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+                <h3 style="color: var(--accent); padding: 0.5rem 1rem;">Paper leak😁</h3>
+            </div>
+            <div class="feature-card" style="padding: 0; border: none; box-shadow: none; background: transparent;">
+                <iframe width="100%" height="180" src="https://www.youtube.com/embed/_n2oBJAYwbY?si=pCwcRTpep6sCGK5E" 
+                    title="Lecture 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+                <h3 style="color: var(--accent); padding: 0.5rem 1rem;">No more backlog👍</h3>
+            </div>
+            <!-- Add more videos as needed -->
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="features">
+  <!-- existing features content -->
+</section>
+
+<!-- Lecture Videos Section -->
+<section id="lectures" class="features" style="padding: 100px 0; background: var(--primary-bg);">
+  <!-- new lecture videos content here -->
+</section>
+
+<!-- Notes Upload Section -->
+<section id="notes" class="notes-section">
+  <!-- existing notes content -->
+</section>
+
+
+    <!-- Notes Upload Section -->
+    <section id="notes" class="notes-section">
+        <div class="container">
+            <h2 class="section-title">Upload Mathematical Notes</h2>
+            
+            <div class="upload-container">
+                <h3 style="color: var(--accent); margin-bottom: 1rem;">Upload PDF Note</h3>
+                <form class="upload-form" id="noteForm">
+                    <input type="text" id="noteTitle" placeholder="Note Title" required>
+                    <select id="noteCategory">
+                        <option value="algebra">Algebra</option>
+                        <option value="geometry">Geometry</option>
+                        <option value="calculus">Calculus</option>
+                        <option value="statistics">Statistics</option>
+                        <option value="trigonometry">Trigonometry</option>
+                    </select>
+                    <div class="file-input-container">
+                        <input type="file" id="pdfFile" accept=".pdf" required>
+                        <div class="file-input-label">
+                            <strong>Click to upload PDF</strong><br>
+                            <small>Maximum file size: 10MB</small>
+                        </div>
+                    </div>
+                    <button type="submit">Upload PDF Note</button>
+                </form>
+            </div>
+
+            <div class="notes-gallery" id="notesList">
+                <!-- Notes will be dynamically populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Doubt Box Section -->
+    <section id="doubt" class="doubt-section">
+        <div class="container">
+            <h2 class="section-title">Student Doubt Box</h2>
+            
+            <div class="doubt-container">
+                <form class="doubt-form" id="doubtForm">
+                    <input type="text" id="doubtTitle" placeholder="Question Title" required>
+                    <textarea id="doubtContent" placeholder="Describe your mathematical doubt or question..." required></textarea>
+                    <select id="doubtCategory">
+                        <option value="general">General Mathematics</option>
+                        <option value="algebra">Algebra</option>
+                        <option value="geometry">Geometry</option>
+                        <option value="calculus">Calculus</option>
+                    </select>
+                    <button type="submit">Submit Doubt</button>
+                </form>
+
+                <div class="doubt-list" id="doubtsList">
+                    <!-- Doubts will be dynamically populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Panel -->
+    <section id="admin" class="admin-panel">
+        <div class="container">
+            <h2 class="section-title">Admin Control Panel</h2>
+            
+            <div class="admin-controls-panel">
+                <h3 style="color: var(--accent); margin-bottom: 1rem;">Permission Settings</h3>
+                
+                <div class="permission-toggle">
+                    <span>Allow Note Editing:</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="editPermission">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="permission-toggle">
+                    <span>Allow Doubt Responses:</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="responsePermission" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="permission-toggle">
+                    <span>Allow Content Deletion:</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="deletePermission">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <button class="cta-button" style="margin-top: 2rem;" onclick="savePermissions()">Save Permissions</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Mathantics</h3>
+                    <p>We're dedicated to making mathematics accessible, engaging, and secure for learners and educators.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#features" style="color: var(--text-secondary); text-decoration: none;">Features</a></p>
+                    <p><a href="#notes" style="color: var(--text-secondary); text-decoration: none;">Notes</a></p>
+                    <p><a href="#doubt" style="color: var(--text-secondary); text-decoration: none;">Doubt Box</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: learn@eraofmathantics.com</p>
+                    <p>Phone: (555) 123-MATH</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Era of Mathantics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Notes Management
+        let notes = JSON.parse(localStorage.getItem('mathantics_notes')) || [];
+        let doubts = JSON.parse(localStorage.getItem('mathantics_doubts')) || [];
+        let permissions = JSON.parse(localStorage.getItem('mathantics_permissions')) || {
+            editNotes: false,
+            respondDoubts: true,
+            deleteContent: false
+        };
+
+        // Initialize the application
+        function initApp() {
+            updatePermissionsUI();
+            renderNotes();
+            renderDoubts();
+            setupEventListeners();
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            document.getElementById('noteForm').addEventListener('submit', handleNoteUpload);
+            document.getElementById('doubtForm').addEventListener('submit', handleDoubtSubmit);
+            document.getElementById('pdfFile').addEventListener('change', handleFileSelect);
+        }
+
+        // Handle file selection
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file && file.type !== 'application/pdf') {
+                alert('Please upload a PDF file only.');
+                e.target.value = '';
+            }
+        }
+
+        // Handle note upload
+        function handleNoteUpload(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('noteTitle').value;
+            const category = document.getElementById('noteCategory').value;
+            const file = document.getElementById('pdfFile').files[0];
+            
+            if (!file) {
+                alert('Please select a PDF file to upload.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const newNote = {
+                    id: Date.now(),
+                    title: title,
+                    category: category,
+                    fileName: file.name,
+                    fileSize: formatFileSize(file.size),
+                    uploadDate: new Date().toLocaleDateString(),
+                    content: e.target.result, // Base64 encoded PDF
+                    uploadTime: new Date().toISOString()
+                };
+                
+                notes.push(newNote);
+                localStorage.setItem('mathantics_notes', JSON.stringify(notes));
+                renderNotes();
+                
+                // Reset form
+                document.getElementById('noteForm').reset();
+                
+                // Show success message
+                showMessage('PDF note uploaded successfully!', 'success');
+            };
+            
+            reader.readAsDataURL(file);
+        }
+
+        // Handle doubt submission
+        function handleDoubtSubmit(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('doubtTitle').value;
+            const content = document.getElementById('doubtContent').value;
+            const category = document.getElementById('doubtCategory').value;
+            
+            const newDoubt = {
+                id: Date.now(),
+                title: title,
+                content: content,
+                category: category,
+                status: 'pending',
+                date: new Date().toLocaleDateString(),
+                time: new Date().toLocaleTimeString(),
+                answer: ''
+            };
+            
+            doubts.push(newDoubt);
+            localStorage.setItem('mathantics_doubts', JSON.stringify(doubts));
+            renderDoubts();
+            
+            // Reset form
+            document.getElementById('doubtForm').reset();
+            
+            // Show success message
+            showMessage('Doubt submitted successfully!', 'success');
+        }
+
+        // Render notes list
+        function renderNotes() {
+            const notesList = document.getElementById('notesList');
+            notesList.innerHTML = '';
+            
+            if (notes.length === 0) {
+                notesList.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No notes uploaded yet.</p>';
+                return;
+            }
+            
+            notes.forEach(note => {
+                const noteCard = document.createElement('div');
+                noteCard.className = 'note-card';
+                noteCard.innerHTML = `
+                    <div class="note-header">
+                        <div class="pdf-icon">📄</div>
+                        <div class="note-content">
+                            <h4>${note.title}</h4>
+                            <div class="note-meta">${note.category} • Uploaded: ${note.uploadDate}</div>
+                        </div>
+                    </div>
+                    <div class="file-info">
+                        File: ${note.fileName} (${note.fileSize})
+                    </div>
+                    <div class="note-actions">
+                        <button class="note-btn" onclick="downloadNote(${note.id})">Download</button>
+                        <button class="note-btn" onclick="viewNote(${note.id})" disabled>View</button>
+                    </div>
+                `;
+                notesList.appendChild(noteCard);
+            });
+        }
+
+        // Render doubts list
+        function renderDoubts() {
+            const doubtsList = document.getElementById('doubtsList');
+            doubtsList.innerHTML = '';
+            
+            if (doubts.length === 0) {
+                doubtsList.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No doubts submitted yet.</p>';
+                return;
+            }
+            
+            doubts.forEach(doubt => {
+                const doubtItem = document.createElement('div');
+                doubtItem.className = 'doubt-item';
+                
+                let adminControls = '';
+                if (permissions.respondDoubts) {
+                    adminControls = `
+                        <div class="admin-controls">
+                            <button class="admin-btn btn-answer" onclick="answerDoubt(${doubt.id})">Answer</button>
+                            ${permissions.deleteContent ? 
+                                `<button class="admin-btn btn-delete" onclick="deleteDoubt(${doubt.id})">Delete</button>` : ''
+                            }
+                        </div>
+                    `;
+                }
+                
+                doubtItem.innerHTML = `
+                    <div class="doubt-header">
+                        <div>
+                            <h4 class="doubt-title">${doubt.title}</h4>
+                            <div class="doubt-meta">${doubt.category} • Submitted: ${doubt.date} at ${doubt.time}</div>
+                        </div>
+                        <span class="doubt-status status-${doubt.status}">${doubt.status}</span>
+                    </div>
+                    <p>${doubt.content}</p>
+                    ${doubt.answer ? `<div style="margin-top: 1rem; padding: 1rem; background: var(--primary-bg); border-radius: 8px;">
+                        <strong style="color: var(--accent);">Answer:</strong>
+                        <p>${doubt.answer}</p>
+                    </div>` : ''}
+                    ${adminControls}
+                `;
+                doubtsList.appendChild(doubtItem);
+            });
+        }
+
+        // Download note
+        function downloadNote(noteId) {
+            const note = notes.find(n => n.id === noteId);
+            if (!note) return;
+            
+            const link = document.createElement('a');
+            link.href = note.content;
+            link.download = note.fileName;
+            link.click();
+        }
+
+        // View note (placeholder for future PDF viewer integration)
+        function viewNote(noteId) {
+            alert('PDF viewing functionality would be implemented here with a proper PDF viewer library.');
+        }
+
+        // Answer doubt
+        function answerDoubt(doubtId) {
+            if (!permissions.respondDoubts) {
+                alert('You do not have permission to answer doubts.');
+                return;
+            }
+            
+            const answer = prompt('Enter your answer to this doubt:');
+            if (answer && answer.trim()) {
+                const doubt = doubts.find(d => d.id === doubtId);
+                if (doubt) {
+                    doubt.answer = answer.trim();
+                    doubt.status = 'answered';
+                    localStorage.setItem('mathantics_doubts', JSON.stringify(doubts));
+                    renderDoubts();
+                    showMessage('Doubt answered successfully!', 'success');
+                }
+            }
+        }
+
+        // Delete doubt
+        function deleteDoubt(doubtId) {
+            if (!permissions.deleteContent) {
+                alert('You do not have permission to delete doubts.');
+                return;
+            }
+            
+            if (confirm('Are you sure you want to delete this doubt?')) {
+                doubts = doubts.filter(d => d.id !== doubtId);
+                localStorage.setItem('mathantics_doubts', JSON.stringify(doubts));
+                renderDoubts();
+                showMessage('Doubt deleted successfully!', 'success');
+            }
+        }
+
+        // Save permissions
+        function savePermissions() {
+            permissions = {
+                editNotes: document.getElementById('editPermission').checked,
+                respondDoubts: document.getElementById('responsePermission').checked,
+                deleteContent: document.getElementById('deletePermission').checked
+            };
+            
+            localStorage.setItem('mathantics_permissions', JSON.stringify(permissions));
+            updatePermissionsUI();
+            showMessage('Permissions saved successfully!', 'success');
+        }
+
+        // Update permissions UI
+        function updatePermissionsUI() {
+            document.getElementById('editPermission').checked = permissions.editNotes;
+            document.getElementById('responsePermission').checked = permissions.respondDoubts;
+            document.getElementById('deletePermission').checked = permissions.deleteContent;
+        }
+
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Show message
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
+            messageDiv.textContent = message;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
+
+```
