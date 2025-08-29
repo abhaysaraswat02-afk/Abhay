@@ -1207,6 +1207,12 @@ function deleteNote(noteId) {
     showMessage('Note deleted successfully!', 'success');
 }
     </script>
+ <div id="adminLogin" style="text-align:center; margin:2rem;">
+    <input type="password" id="adminPassword" placeholder="Enter Admin Password">
+    <button onclick="checkAdmin()">Login</button>
+</div>
+    <section id="admin" class="admin-panel" style="display:none;">
+        </section>
     <script>
 function checkAdmin() {
     const pass = document.getElementById('adminPassword').value;
@@ -1222,4 +1228,5 @@ function checkAdmin() {
 </html>
 
 ```
+
 
