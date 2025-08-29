@@ -1207,7 +1207,19 @@ function deleteNote(noteId) {
     showMessage('Note deleted successfully!', 'success');
 }
     </script>
+    <script>
+function checkAdmin() {
+    const pass = document.getElementById('adminPassword').value;
+    if(pass === "yourSecretPassword123"){   // Change this to your own password
+        document.getElementById("admin").style.display = "block";
+        document.getElementById("adminLogin").style.display = "none";
+    } else {
+        alert("Wrong password!");
+    }
+}
+</script>
 </body>
 </html>
 
 ```
+
