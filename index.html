@@ -1145,7 +1145,50 @@
         // Initialize the application
         document.addEventListener('DOMContentLoaded', initApp);
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const OWNER_PASSWORD = 'admin123'; // Change to your secure password
+
+    function checkAdminAccess() {
+        const hasAccess = sessionStorage.getItem('isAdmin');
+        if (hasAccess === 'true') {
+            return true;
+        } else {
+            const pass = prompt('Enter admin password to access Admin Panel:');
+            if (pass === OWNER_PASSWORD) {
+                sessionStorage.setItem('isAdmin', 'true');
+                return true;
+            } else {
+                alert('Incorrect password. Access denied.');
+                return false;
+            }
+        }
+    }
+
+    // Hide admin panel by default
+    const adminSection = document.getElementById('admin');
+    if (adminSection) {
+        adminSection.style.display = 'none';
+    }
+
+    // Show admin panel only if admin access granted
+    const adminLink = document.querySelector('a[href="#admin"]');
+    if (adminLink) {
+        adminLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (checkAdminAccess()) {
+                adminSection.style.display = 'block';
+                adminSection.scrollIntoView({behavior: 'smooth'});
+            }
+        });
+    }
+
+    // Initialize the rest of your app
+    initApp();
+});
+</script>
 </body>
 </html>
 
 ```
+
