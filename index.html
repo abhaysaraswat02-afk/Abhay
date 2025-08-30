@@ -625,6 +625,25 @@
             text-align: center;
         }
     </style>
+    <style>
+        <!-- Firebase App (the core Firebase SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<!-- Firebase Firestore -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+        const firebaseConfig = {
+  apiKey: "
+AIzaSyDwsfBGABIxP4H912GJ5D1fZkbNTHVhJfY",
+  authDomain: "era-of-mathantics.firebaseapp.com",
+  projectId: "era-of-mathantics",
+  storageBucket: "era-of-mathantics.appspot.com",
+  messagingSenderId: "178854785966",
+  appId: "1:178854785966:web:6d71e5879c41ca8eaf0e3f"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -1191,4 +1210,5 @@
 </html>
 
 ```
+
 
